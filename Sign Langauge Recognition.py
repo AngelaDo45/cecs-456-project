@@ -6,14 +6,16 @@ from PIL import Image as im
 
 def load_images(folder):
     images = [] 
-    # label = []
+    labels = []
     for filename in os.listdir(folder):
+#         print(filename)
         image = io.imread(os.path.join(folder, filename))
         if image is not None:
             images.append(image)
+            labels.append(filename[-6])
             # display_image(image)
-    images =  np.asarray(images) 
-    return images
+    images =  np.asarray(images)
+    return images, labels
   
 
 def display_image(img):
@@ -30,13 +32,12 @@ def import_data():
 
 
 def main():
-    # dataset = load_images('./data/train/')
-    dataset = load_images('./try/')
+    dataset,labels = load_images('./data/train/')
+    # dataset = load_images('./try/')
     print(type(dataset))
     print(dataset.shape)
-
-    img = im.fromarray(dataset[:,:,:], 'RGB')
-    img.show()
+    # print(dataset)
+    print(labels)
 
 
 if __name__ == '__main__':
